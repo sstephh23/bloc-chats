@@ -17,19 +17,19 @@ class RoomList extends Component {
        this.setState({ rooms: this.state.rooms.concat( room ) })
     });
    }
+
     render() {
       return (
-      <section className='roomdata'>
+        <section className='roomlist'>
           {
-            this.state.rooms.map( (rooms) =>
-            <div key = {index}>
+          this.state.rooms.map( (index,rooms) =>
+            <div key = {index} >
             {rooms.data}
             </div>
             )
           }
-          </div>
       </section>
       )
     }
 }
-export default App;
+export default RoomList;
