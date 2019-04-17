@@ -17,6 +17,7 @@ class RoomList extends Component {
        this.setState({ rooms: this.state.rooms.concat( room ) })
     });
    }
+<<<<<<< HEAD
     render() {
       return (
       <section className='roomdata'>
@@ -28,8 +29,25 @@ class RoomList extends Component {
             )
           }
           </div>
+=======
+
+    render() {
+      return (
+        <section className='roomdata'>
+          {
+          this.state.rooms.map( (rooms)=>
+            <div key = {rooms} >
+          {rooms.name}
+            </div>
+            )
+          }
+>>>>>>> list-rooms-chat-assignment
       </section>
       )
     }
 }
+<<<<<<< HEAD
 export default App;
+=======
+export default RoomList;
+>>>>>>> list-rooms-chat-assignment
