@@ -33,7 +33,7 @@ class RoomList extends Component {
 
     render() {
       return (
-        <section className='roomdata'>
+        <section className='roomlist'>
           {
           this.state.rooms.map( (rooms)=>
             <div key = {rooms} >
