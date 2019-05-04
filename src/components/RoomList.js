@@ -24,14 +24,13 @@ class RoomList extends Component {
       });
      }
 
-     handleChange(e) {
-      this.setState({ newRoomName: e.target.value })
+     createRoom(e) {
+     this.setState({ newRoomName:e.target.value })
      }
 
      handleSubmit(e) {
-      e.preventDefault();
-      const newRoom = { description: this.state.newRoomName };
-      this.setState({ rooms: [...this.state.newRoomName, newRoom] });
+      const createRoom = { room: this.state.newRoomName };
+      this.setState({ rooms: [this.state.newRoomName, createRoom] });
      }
 
     render() {
@@ -44,10 +43,10 @@ class RoomList extends Component {
               </div>
             )
           }
-      <form onSubmit={ (e) => this.handleSubmit(e) }>
-        <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
-        <input type="submit"/>
-      </form>
+          <form onSubmit={ (e) => this.handleSubmit(e) }>
+              <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.createRoom(e) } />
+              <input type="submit" />
+          </form>
       </section>
       )
     }
