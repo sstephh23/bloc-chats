@@ -15,7 +15,6 @@ class RoomList extends Component {
         });
     }
 
-
      componentDidMount() {
       this.roomsRef.on('child_added', snapshot => {
        const room = snapshot.val();
@@ -24,13 +23,14 @@ class RoomList extends Component {
       });
      }
 
-     createRoom(e) {
+     handleChange(e) {
      this.setState({ newRoomName:e.target.value })
      }
 
      handleSubmit(e) {
-      const createRoom = { room: this.state.newRoomName };
-      this.setState({ rooms: [this.state.newRoomName, createRoom] });
+       this.roomsRef.push({
+         name: this.state.newRoomName
+       });
      }
 
     render() {
@@ -44,7 +44,7 @@ class RoomList extends Component {
             )
           }
           <form onSubmit={ (e) => this.handleSubmit(e) }>
-              <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.createRoom(e) } />
+              <input type="text" value={ this.state.newRoomName } onChange={ (e) => this.handleChange(e) } />
               <input type="submit" />
           </form>
       </section>
