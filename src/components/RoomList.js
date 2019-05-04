@@ -28,18 +28,20 @@ class RoomList extends Component {
      }
 
      handleSubmit(e) {
+       e.preventDefault();
        this.roomsRef.push({
          name: this.state.newRoomName
        });
+       this.setState({ newRoomName: '' });
      }
 
     render() {
       return (
       <section className='roomdata'>
           {
-            this.state.rooms.map( (rooms) =>
-              <div key = {rooms}>
-                {rooms.name}
+            this.state.rooms.map( (room, index) =>
+              <div key = {index}>
+                {room.name}
               </div>
             )
           }
