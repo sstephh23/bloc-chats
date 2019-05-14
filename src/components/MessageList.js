@@ -20,19 +20,15 @@ class MessageList extends Component {
 
     render() {
       return (
-       <div> {this.state.messages.map((message, index) => {
-          if (message.roomId === this.props.activeRoom) {
-           return (<div key={message.key}> {message.content} </div>)
-         } else {
-         return null;
-         }
-       }
-       )
-       }
+       <div>
+       {this.state.messages.map((message, room) => {
+         if (message.roomId === this.props.activeRoom) {
+          return ( <div key={message}> {message.content} </div>)
+        } else {
+        return null;
+        }
+      })}
       </div>
-      ,MessageList.orderByChild("-Le_VZ7fOUu9i-WgWBJb"), function(snapshot){
-        console.log(snapshot.key());
-      }
     );
    }
 }

@@ -26,9 +26,9 @@ class App extends Component {
      }
      this.selectRoom=this.selectRoom.bind(this)
   }
-  selectRoom(index) {
-    this.setState({activeRoom:index})
-    console.log(index);
+  selectRoom(room) {
+    this.setState({activeRoom:room})
+    console.log(room);
   }
 
   render() {
