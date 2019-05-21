@@ -21,14 +21,19 @@ class App extends Component {
       super(props);
 
       this.state = {
-       activeRoom: ''
-
+       activeRoom: '',
+       username: ''
      }
      this.selectRoom=this.selectRoom.bind(this)
   }
   selectRoom(room) {
     this.setState({activeRoom:room})
     console.log(room);
+  }
+
+  setUser(current) {
+    this.setState({ username: current })
+    console.log(current);
   }
 
   render() {
