@@ -5,7 +5,7 @@ class User extends Component {
      super(props);
 
      this.state = {
-      user: ''
+      user: []
      };
      const provider = new this.props.firebase.auth.GoogleAuthProvider();
    }
@@ -36,9 +36,17 @@ class User extends Component {
 
    render() {
      return (
-     <section className='signin'>
-       <button  onClick= { (e) => this.props.firebase.auth().signInWithPopup( provider ); } onSetUser= {this.props.setUser(name)} >{this.props.user.displayName}</button>
-       <button  onClick= { (e) => this.props.firebase.auth().signOut(); }></button>
+     <section className='user' >
+     { this.state.user.map((name,index) =>
+
+     <div key={index} onClick= {(e) => this.props.setUser(e)}>{this.props.user.displayName}</div>
+      )
+     }
+     <form>
+       <button  type="submit" onClick= { (e) => this.props.firebase.auth().signInWithPopup( provider ); }></button>
+       <button  type="submit" onClick= { (e) => this.props.firebase.auth().signOut(); }></button>
+     </form>
+     </section>
 
      )
    }

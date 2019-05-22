@@ -31,9 +31,8 @@ class App extends Component {
     console.log(room);
   }
 
-  setUser(current) {
-    this.setState({ username: current })
-    console.log(current);
+  setUser(e) {
+    this.setState({ username: e.target.value })
   }
 
   render() {
