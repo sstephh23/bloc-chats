@@ -7,7 +7,6 @@ class User extends Component {
      this.state = {
       user: []
      };
-     const provider = new this.props.firebase.auth.GoogleAuthProvider();
    }
 
   componentDidMount () {
@@ -16,22 +15,13 @@ class User extends Component {
     });
   }
 
-   signInWithPopup() {
-     firebase.auth().signInWithPopup(provider).then(function(result) {
-       var token = result.credential.accessToken;
-       var user = result.user;
-     }).catch(function(error) {
-         var errorCode = error.code;
-         var errorMessage = error.message;
-         var email = error.email;
-         var credential = error.credential;
-     });
-   }
+    signInWithPopup() {
+    const provider = new this.props.firebase.auth.GoogleAuthProvider();
+    this.props.firebase.auth().signInWithPopup(provider)
+     }
 
    signOut() {
-     firebase.auth().signOut().then(function() {
-     }).catch(function(error) {
-     });
+     this.props.firebase.auth().signOut() 
    }
 
    render() {
@@ -39,15 +29,16 @@ class User extends Component {
      <section className='user' >
      { this.state.user.map((name,index) =>
 
-     <div key={index} onClick= {(e) => this.props.setUser(e)}>{this.props.user.displayName}</div>
+     <div> {this.props.user.displayName}</div>
       )
      }
      <form>
-       <button  type="submit" onClick= { (e) => this.props.firebase.auth().signInWithPopup( provider ); }></button>
-       <button  type="submit" onClick= { (e) => this.props.firebase.auth().signOut(); }></button>
+       <button  type="submit" onClick= {(e) =>  this.signInWithPopup() }>Google Sign-in</button>
+       <button  type="submit" onClick= {(e) => this.signOut() }>Google Sign-out</button>
      </form>
      </section>
 
      )
    }
 }
+export default User;
