@@ -23,7 +23,7 @@ class MessageList extends Component {
        <div>
        {this.state.messages.map((message, room, index) => {
          if (message.roomId === this.props.activeRoom.key) {
-          return ( <div key={message.key}> {message.content} </div>)
+          return ( <div key={message.key}>{message.username}: {message.content} </div>)
         } else {
         return null;
         }
