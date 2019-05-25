@@ -27,9 +27,7 @@ class User extends Component {
    render() {
      return (
       <section className='user'>
-      { this.state.user.map((user) =>
       <div> {this.props.user ? this.props.user.displayName : "Guest"}</div>
-    )}
         <button onClick= {(e) =>  this.signInWithPopup() }>Google Sign-in </button>
         <button onClick= {(e) => this.signOut() }>Google Sign-out</button>
      </section>
