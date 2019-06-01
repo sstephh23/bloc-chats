@@ -7,11 +7,11 @@ class MessageList extends Component {
         this.state = {
           messages: ''
         };
-        this.MessageList = this.props.firebase.database().ref('messages');
+        this.messageList = this.props.firebase.database().ref('messages');
     }
 
     componentDidMount() {
-     this.MessageList.on('child_added', snapshot => {
+     this.messageList.on('child_added', snapshot => {
       const message = snapshot.val();
       message.key = snapshot.key;
       this.setState({ messages: this.state.messages.concat( message ) })
@@ -23,22 +23,26 @@ class MessageList extends Component {
     }
 
     handleSubmit(e) {
-    e.preventDefault();
-      this.MessageList.push({
-        messageContent: this.state.messages
-      });
+      e.preventDefault();
+      this.messageList.push(
+        {
+          content: this.state.messages,
+          roomId: this.props.activeRoom.key,
+          sentAt: 'firebase.database.ServerValue.TIMESTAMP',
+          username: this.props.setUser
+        }
+      );
       this.setState({ messages: '' });
     }
 
     render() {
       return (
        <section>
-       <form>
-          <input type="text" value={ this.props.messages } onChange={ (e) => this.handleChange(e) } />
-          <input type="submit" onSubmit={ (e) => this.handleSubmit(e) }/>
-       </form>
-       <div>{this.props.user }</div>
-
+         <form onSubmit={ (e) => this.handleSubmit(e) }>
+           Add message to {this.props.activeRoom.name}<br/>
+           <input type="text" value={ this.props.messages } onChange={ (e) => this.handleChange(e) } />
+           <input type="submit" />
+        </form>
       </section>
     );
    }
