@@ -5,9 +5,10 @@ class MessageList extends Component {
         super(props);
 
         this.state = {
-          messages: ''
+          messages: []
         };
         this.messageList = this.props.firebase.database().ref('messages');
+        console.log('messageList',this.messageList)
     }
 
     componentDidMount() {
@@ -19,30 +20,42 @@ class MessageList extends Component {
     }
 
     handleChange(e) {
-    this.setState({ messages: e.target.value })
+    // set a new variable that is a string of the new text
+    let newVar = 'new message'
+    //this.setState({ messages: e.target.value })
     }
 
     handleSubmit(e) {
       e.preventDefault();
       this.messageList.push(
         {
-          content: this.state.messages,
+          content: 'new message',//this.state.messages,//needs to be set to the newMessage string
           roomId: this.props.activeRoom.key,
           sentAt: 'firebase.database.ServerValue.TIMESTAMP',
-          username: this.props.setUser
+          username: this.props.user//wtong method the string of the userName
         }
       );
-      this.setState({ messages: '' });
+      this.setState({ messages: [] });
     }
 
     render() {
+      //console.log('messageList console',this.messageList);
       return (
        <section>
          <form onSubmit={ (e) => this.handleSubmit(e) }>
            Add message to {this.props.activeRoom.name}<br/>
            <input type="text" value={ this.props.messages } onChange={ (e) => this.handleChange(e) } />
            <input type="submit" />
-        </form>
+         </form>
+         <div>
+           {this.state.messages.map((message, index) => {
+           if (message.roomId === this.props.activeRoom.key) {
+               return ( <div key={message.key}>{message.username}: {message.content} </div>)
+           } else {
+               return null;
+           }
+           })}
+        </div>
       </section>
     );
    }
